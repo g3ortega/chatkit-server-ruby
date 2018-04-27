@@ -82,24 +82,16 @@ module Chatkit
       )
     end
 
-    def update_user(id, name = nil, avatar_url = nil, custom_data = nil)
+    def update_user(user_id, name = nil, avatar_url = nil, custom_data = nil)
       body = {}
 
-      unless name.nil?
-        body[:name] = name
-      end
-
-      unless avatar_url.nil?
-        body[:avatar_url] = avatar_url
-      end
-
-      unless custom_data.nil?
-        body[:custom_data] = custom_data
-      end
+      body[:name] = name unless name.nil?
+      body[:avatar_url] = avatar_url unless avatar_url.nil?
+      body[:custom_data] = custom_data unless custom_data.nil?
 
       @api_instance.request(
         method: "PUT",
-        path: "/users/#{id}",
+        path: "/users/#{user_id}",
         headers: {
           "Content-Type": "application/json",
         },
