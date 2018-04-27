@@ -82,6 +82,33 @@ module Chatkit
       )
     end
 
+    def update_user(id, name = nil, avatar_url = nil, custom_data = nil)
+      body = {}
+
+      unless name.nil?
+        body[:name] = name
+      end
+
+      unless avatar_url.nil?
+        body[:avatar_url] = avatar_url
+      end
+
+      unless custom_data.nil?
+        body[:custom_data] = custom_data
+      end
+
+      @api_instance.request(
+        method: "PUT",
+        path: "/users/#{id}",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+        jwt: generate_su_token
+      )
+    end
+
+
     def delete_user(id)
       @api_instance.request(
         method: "DELETE",
